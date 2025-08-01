@@ -41,6 +41,9 @@ gem "thruster", require: false
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 
+# Library for making HTTP calls easy
+gem "httparty", "~> 0.23.1"
+
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
@@ -63,6 +66,7 @@ group :development, :test do
 
   # RSpec test framework
   gem "rspec-rails", "~> 8.0"
-end
 
-gem "httparty", "~> 0.23.1"
+  # Debugging tool
+  gem "byebug", "~> 12.0"
+end

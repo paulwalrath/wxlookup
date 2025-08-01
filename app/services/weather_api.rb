@@ -18,7 +18,7 @@ class WeatherApi
     is_cached = true
     observation = Rails.cache.fetch("weather/current/#{location_key}", expires_in: 30.minutes) do
       is_cached = false
-      response = HTTParty.get("#{WEATHER_API_BASE_URL}/current.json", {
+      response = HTTParty.get("#{WEATHER_API_BASE_URL}/current.json", query: {
         q: location,
         key: WEATHER_API_KEY
       })
