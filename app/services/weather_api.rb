@@ -1,7 +1,4 @@
 class WeatherApi
-  # include HTTParty
-  # base_uri WEATHER_API_BASE_URL
-
   # This service actually does the interaction between the Rails app and
   # weatherapi.com.
   #
@@ -26,6 +23,24 @@ class WeatherApi
     end
 
     { data: observation, cached: is_cached }
+  end
+
+  def self.get_forecast(location)
+    raise ArgumentError("No location given") unless location
+
+    location_key = make_location_key(location)
+
+    is_cached = true
+    forecast = Rails.cache.fetch("weather/forecast/#{location_key}", expires_in: 30.minutes) do
+      is_cached = false
+      response = HTTParty.get("#{WEATHER_API_BASE_URL}/forecast.json", query: {
+        q: location,
+        key: WEATHER_API_KEY
+      })
+      JSON.parse(response.body)
+    end
+
+    { data: forecast, cached: is_cached }
   end
 
   private
