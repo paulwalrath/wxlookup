@@ -69,4 +69,7 @@ group :development, :test do
 
   # Debugging tool
   gem "byebug", "~> 12.0"
+
+  # Code coverage tool
+  gem "simplecov", require: false
 end
