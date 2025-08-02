@@ -22,7 +22,11 @@ class WeatherApi
       JSON.parse(response.body)
     end
 
-    { data: observation, cached: is_cached }
+    if observation.dig("error")
+      { error: observation["error"] }
+    else
+      { data: observation, cached: is_cached }
+    end
   end
 
   def self.get_forecast(location)
@@ -40,7 +44,11 @@ class WeatherApi
       JSON.parse(response.body)
     end
 
-    { data: forecast, cached: is_cached }
+    if forecast.dig("error")
+      { error: forecast["error"] }
+    else
+      { data: forecast, cached: is_cached }
+    end
   end
 
   private

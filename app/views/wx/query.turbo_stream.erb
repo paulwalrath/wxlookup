@@ -1,5 +1,7 @@
 <%= turbo_stream.update "wx_result" do %>
-    <% if params[:type] == 'forecast' %>
+    <% if @weather_data.dig(:error) %>
+        <%= @weather_data[:error] %>
+    <% elsif params[:type] == 'forecast' %>
         <%= render "forecast", wx: @weather_data %>
     <% else %>
         <%= render "current", wx: @weather_data %>

@@ -63,10 +63,32 @@ RSpec.describe "WxController", type: :request do
     end
 
     context "without a required location" do
-      it "fails with an error" do
-        post "/wx/query", xhr: true  # all required parameters missing
-        expect(response).to have_http_status(:bad_request)
+      it "displays an error" do
+        post "/wx/query", headers: turbo_headers  # all required parameters missing
+        # Note: even with an error, it still returns HTTP 200. This
+        # is just DOM manipulation, not a resource.
         expect(response.body).to match(/No location given/)
+      end
+    end
+
+    context "with an unknown location" do
+      before do
+        stub_request(:get, "#{WEATHER_API_BASE_URL}/current.json")
+          .with(query: hash_including(q: anything, key: WEATHER_API_KEY))
+          .to_return_json(status: 200, body: {
+            error: { code: 1006,
+                     message: "No matching location found."
+                   }
+          })
+      end
+
+      it "displays an error" do
+        post wx_query_path,
+          params: { type: :current, location: "ZZZZZZZZZZZZZZZZZZZZ" },
+          headers: turbo_headers
+        # Note: even with an error, it still returns HTTP 200. This
+        # is just DOM manipulation, not a resource.
+        expect(response.body).to match(/No matching location found/)
       end
     end
   end
