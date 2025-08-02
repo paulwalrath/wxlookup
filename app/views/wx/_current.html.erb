@@ -1,6 +1,28 @@
 <div class="bg-blue-50 p-4 rounded">
-    <h3>Current</h3>
+    <h3 class="font-bold text-2xl mb-9">
+        Current Observation for 
+        <%= wx[:data]['location']['name'] %>
+    </h3>
+
+    <div class="grid grid-cols-2 gap-4">
+        <div class="flex justify-center h-full">
+            <img src="https:<%= wx[:data]['current']['condition']['icon'] %>" />
+        </div>
+        <div class="flex flex-col gap-2">
+            <div class="text-4xl font-bold">
+                <%= wx[:data]['current']['temp_c'] %>&#xb0; C
+            </div>
+            <div class="text-lg text-grey-600">
+                <%= wx[:data]['current']['condition']['text'] %>
+            </div>
+        </div>
+
+    </div>
+
     <pre>
-        <%= current %>
+<%= JSON.pretty_generate(wx[:data]['current']) %>
     </pre>
+    <div class="text-sm text-right">
+        <%= wx[:cached] ? "(Cached result)" : "(Performed API call)" %>
+    </div>
 </div>

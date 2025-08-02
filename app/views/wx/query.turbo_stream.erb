@@ -1,7 +1,7 @@
 <%= turbo_stream.update "wx_result" do %>
     <% if params[:type] == 'forecast' %>
-        <%= render "forecast", forecast: @weather_data %>
+        <%= render "forecast", wx: @weather_data %>
     <% else %>
-        <%= render "current", forecast: @weather_data %>
+        <%= render "current", wx: @weather_data %>
     <% end %>
 <% end %>

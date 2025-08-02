@@ -1,6 +1,12 @@
 <div class="bg-blue-50 p-4 rounded">
-    <h3>Current</h3>
+    <h3 class="font-bold text-2xl mb-9">
+        Forecast for <%= wx[:data]['location']['name'] %>
+    </h3>
+
     <pre>
-        <%= current %>
+<%= JSON.pretty_generate(wx[:data]['forecast']) %>
     </pre>
+    <div class="text-sm text-right">
+        <%= wx[:cached] ? "(Cached result)" : "(Performed API call)" %>
+    </div>
 </div>
