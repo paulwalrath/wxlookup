@@ -1,15 +1,15 @@
 <div class="max-w-xl w-full bg-white p-8 rounded-lg shadow-md">
   <h1 class="font-bold text-4xl mb-9">Weather Lookup</h1>
-  <p class="mb-15 text-gray-600">
+  <p class="mb-10 text-gray-600">
     Hi! I'm a simple weather lookup program that pulls weather information
     from <a href="https://weatherapi.com">weatherapi.com</a> in JSON format
     and renders the result here.
   </p>
 
   <div class="">
-    <%= form_with url: false,
+    <%= form_with url: wx_query_path,
         data: { turbo: true },
-        class: "space-y-4" do |form| %>
+        class: "space-y-3" do |form| %>
       <div>
         <%= form.text_field :location,
           placeholder: "Enter location",
@@ -29,7 +29,7 @@
             class: "ml-2 block text-sm text-gray-700" %>
         </div>
       </div>
-      <div>
+      <div class="mt-8">
         <%= form.submit "Get weather",
           class: "w-full bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-md transition duration-150 ease-in-out" %>
       </div>

@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   get "wx/index"
-  get "wx/query"
+  post "wx/query"
 
   # Defines the root path route ("/")
   root "wx#index"
