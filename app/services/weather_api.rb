@@ -8,7 +8,7 @@ class WeatherApi
   # See also config/initializers/weather_api.rb
 
   def self.get_current_weather(location)
-    raise ArgumentError("No location given") unless location
+    raise ArgumentError, "No location given" if location.blank?
 
     location_key = make_location_key(location)
 
@@ -26,7 +26,7 @@ class WeatherApi
   end
 
   def self.get_forecast(location)
-    raise ArgumentError("No location given") unless location
+    raise ArgumentError, "No location given" if location.blank?
 
     location_key = make_location_key(location)
 

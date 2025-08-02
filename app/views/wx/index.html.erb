@@ -1,0 +1,40 @@
+<div class="max-w-xl w-full bg-white p-8 rounded-lg shadow-md">
+  <h1 class="font-bold text-4xl mb-9">Weather Lookup</h1>
+  <p class="mb-15 text-gray-600">
+    Hi! I'm a simple weather lookup program that pulls weather information
+    from <a href="https://weatherapi.com">weatherapi.com</a> in JSON format
+    and renders the result here.
+  </p>
+
+  <div class="">
+    <%= form_with url: false,
+        data: { turbo: true },
+        class: "space-y-4" do |form| %>
+      <div>
+        <%= form.text_field :location,
+          placeholder: "Enter location",
+          class: "w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500" %>
+      </div>
+      <div class="flex items-center space-x-4">
+        <div class="flex items-center">
+          <%= form.radio_button :type, :current,
+            class: "h-4 w-4 text-blue-600 focus:ring-blue-500" %>
+          <%= form.label :type_current, "Current conditions",
+            class: "ml-2 block text-sm text-gray-700" %>
+        </div>
+        <div class="flex items-center">
+          <%= form.radio_button :type, :forecast,
+            class: "h-4 w-4 text-blue-600 focus:ring-blue-500" %>
+          <%= form.label :type_forecast, "Forecast",
+            class: "ml-2 block text-sm text-gray-700" %>
+        </div>
+      </div>
+      <div>
+        <%= form.submit "Get weather",
+          class: "w-full bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-md transition duration-150 ease-in-out" %>
+      </div>
+    <% end %>
+
+    <div id="wx_result" class="mt-12"></div>
+  </div>
+</div>
