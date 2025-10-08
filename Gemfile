@@ -42,7 +42,7 @@ gem "thruster", require: false
 # gem "image_processing", "~> 1.2"
 
 # Library for making HTTP calls easy
-gem "httparty", "~> 0.23.1"
+gem "httparty", "~> 0.23.2"
 
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
